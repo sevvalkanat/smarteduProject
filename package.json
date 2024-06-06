@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.3"
+  },
+  "name": "smartedustarter",
+  "description": "smartedu",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sevvalkanat/smarteduProject.git"
+  },
+  "keywords": [
+    "01012580s"
+  ],
+  "author": "sevval kanat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sevvalkanat/smarteduProject/issues"
+  },
+  "homepage": "https://github.com/sevvalkanat/smarteduProject#readme"
+}
