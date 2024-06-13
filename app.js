@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const pageRoute = require('./routes/pageRoute');
 const courseRoute = require('./routes/courseRoute');
-const categoryRoute = require('./routes/categoryRoute')
+const categoryRoute = require('./routes/categoryRoute');
+const userRoute = require('./routes/userRoute')
 
 const app = express()
 
@@ -26,6 +27,9 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use('/',pageRoute);
 app.use('/courses',courseRoute);
 app.use('/categories',categoryRoute);
+app.use('/users',userRoute);
+//app.use('/login',userRoute); 
+
 
 const port = 3000
 app.listen(port,()=>{
