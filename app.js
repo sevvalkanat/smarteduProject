@@ -62,7 +62,7 @@ app.use('*',(req,res,next)=>{
 app.use('/',pageRoute);
 app.use('/courses',courseRoute);
 app.use('/categories',categoryRoute);
-app.use('/users',userRoute);
+app.use('/users',userRoute); //dashboard,login,loagout burdan geliyor
  
 
 
