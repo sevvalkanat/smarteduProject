@@ -15,64 +15,60 @@ exports.createCourse = async (req, res) => {
           user:req.session.userID
 
         });
+        req.flash("success",` ${course.name} has been created succesfully`)
         res.status(201).redirect('/courses')
     }
     catch(error) {
-        res.status(400).json({
-            status: 'fail',
-            error
-        })
+      req.flash("error",`something happened`)
+      res.status(400).redirect('/courses')
 
     }
 
 };
 
-exports.getAllCourses = async (req,res)=>{
-    try{ 
-      const categorySlug = req.query.categories;
-      const query = req.query.search
-      
-      const category = await Category.findOne({slug:categorySlug});
-      
-      let filter = {};
+exports.getAllCourses = async (req, res) => {
+  try {
 
-      if(categorySlug) {
-        filter = {category:category._id}
-      }
-      if(query){
-        filter={name:query}
-      }
-      if(!query && categorySlug) {
-        filter.name="",
-        filter.category=null
-      }
+    const categorySlug = req.query.categories;
+    const query = req.query.search;
 
-  const courses = await Course.find({
-    $or:[
-      { name:{$regex:'.*'+ filter.name + '.*' ,$options:'i'}},
-      {category:filter.category}
-    ]
+    const category = await Category.findOne({slug:categorySlug})
 
-  }).sort('-createdAt').populate('user')
-         const categories = await Category.find();
+    let filter = {};
 
-         res.status(200).render('courses',{
-           courses,
-           categories,
-           page_name: 'courses',
-           
-        });
-
-
+    if(categorySlug) {
+      filter = {category:category._id}
     }
-    catch(error){
-        res.status(400).json({
-            status: 'fail',
-            error
-        })
- 
-    };
- };
+
+    if(query) {
+      filter = {name:query}
+    }
+
+    if(!query && !categorySlug) {
+      filter.name = "",
+      filter.category = null
+    }
+
+    const courses = await Course.find({
+      $or:[
+        {name: { $regex: '.*' + filter.name + '.*', $options: 'i'}},
+        {category: filter.category}
+      ]
+    }).sort('-createdAt').populate('user');
+    const categories = await Category.find();
+
+    res.status(200).render('courses', {
+      courses,
+      categories,
+      page_name: 'courses',
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+  }
+};
 
  exports.getCourse = async (req, res) => {
     try {

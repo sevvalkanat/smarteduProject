@@ -12,3 +12,4 @@ router.route('/release').post(courseController.releaseCourse);
 
 
 module.exports =  router;
+
