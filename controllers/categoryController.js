@@ -3,13 +3,9 @@
 exports.createCategory = async (req, res) => {
     
     try {
-        const category = await Category.create(req.body);
-        res.status(201).json({
-            status: 'success',
-            category,
-        })
-    }
-    catch(error) {
+         await Category.create(req.body);
+        res.status(201).redirect('/users/dashboard');
+    }catch(error) {
         res.status(400).json({
             status: 'fail',
             error
@@ -19,3 +15,17 @@ exports.createCategory = async (req, res) => {
 
 };
 
+exports.deleteCategory = async (req, res) => {
+    
+    try {
+        await Category.findByIdAndDelete(req.params.id);
+        res.status(201).redirect('/users/dashboard');
+    }catch(error) {
+        res.status(400).json({
+            status: 'fail',
+            error
+        })
+
+    }
+
+};

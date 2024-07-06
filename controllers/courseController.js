@@ -129,6 +129,7 @@ exports.deleteCourse = async (req, res) => {
     const course = await Course.findOneAndDelete({ slug: req.params.slug })
     const usersToUpdate = await User.find({ courses: course._id }); 
     for (const user of usersToUpdate) { user.courses.pull(course._id); await user.save(); }
+    //await User.deleteMany({ courses: req.params.id });
     
     
     //const users = await User.find({courses:{ $in:course }}).updateMany({ $pull:{ 'courses':course._id } }) ; student tarafından alının dersi id ile silme
@@ -165,6 +166,8 @@ exports.updateCourse = async (req, res) => {
     });
   }
 };
+
+
 
 
 
