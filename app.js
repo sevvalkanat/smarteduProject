@@ -8,16 +8,13 @@ const MongoStore = require('connect-mongo');
 const pageRoute = require('./routes/pageRoute');
 const courseRoute = require('./routes/courseRoute');
 const categoryRoute = require('./routes/categoryRoute');
-const userRoute = require('./routes/userRoute')
+const userRoute = require('./routes/userRoute');
+require('dotenv').config();
 
 
 const app = express()
-
 //CONNECT DB
-mongoose.connect('mongodb://localhost/smartedu-db'
-).then(() => {
-    console.log('DB connected succescfuly')
-})
+mongoose.connect(`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DBNAME}?authSource=admin`);
 
 
 
