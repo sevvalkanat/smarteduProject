@@ -14,9 +14,7 @@ require('dotenv').config();
 
 const app = express()
 //CONNECT DB
-mongoose.connect(`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DBNAME}?authSource=admin`);
-
-
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DBNAME}?${process.env.MONGODB_QUERY_STRING}`);
 
 //template engine
 app.set("view engine", "ejs");
